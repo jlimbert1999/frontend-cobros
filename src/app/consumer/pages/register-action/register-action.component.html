@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>REGISTRAR ACCION</h2>
+<mat-dialog-content>
+  <div class="container-fluid">
+    <form [formGroup]="FormAction">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Direccion"
+              formControlName="address"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Precio base"
+              formControlName="cost"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Codigo"
+              formControlName="code"
+              required
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button (click)="save()">Guardar</button>
+</mat-dialog-actions>

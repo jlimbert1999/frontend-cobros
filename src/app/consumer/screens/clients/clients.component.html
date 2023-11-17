@@ -1,9 +1,24 @@
 <p>
   <mat-toolbar>
-    <span>Afiliados - Acciones</span>
+    <span>Inicio</span>
+    <span class="toolbar-spacer"></span>
+    <button
+      (click)="addClient()"
+      mat-icon-button
+      aria-label="Add client button"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      (click)="addAction()"
+      mat-icon-button
+      aria-label="Add action button"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
   </mat-toolbar>
 </p>
-<div style="padding: 10px;">
+<div style="padding: 10px">
   <table
     mat-table
     [dataSource]="dataSource"

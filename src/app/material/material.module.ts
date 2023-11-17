@@ -14,6 +14,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatFormFieldModule,
     DragDropModule,
+    MatStepperModule,
   ],
 })
 export class MaterialModule {}

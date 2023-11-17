@@ -1,0 +1,25 @@
+<mat-form-field class="example-full-width">
+  <mat-select
+    (selectionChange)="selectOption($event.value)"
+    [formControl]="resultServerSideCtrl"
+    [placeholder]="placeholder"
+  >
+    <mat-option>
+      <ngx-mat-select-search
+        [placeholderLabel]="'Texto a buscar'"
+        [noEntriesFoundLabel]="'No se encontraron resultados'"
+        [formControl]="resultServerSideFilteringCtrl"
+        [searching]="searching"
+      ></ngx-mat-select-search>
+    </mat-option>
+    @if (allowNullValues) {
+    <mat-option [value]="null"> - </mat-option>
+    }
+    <mat-option
+      *ngFor="let result of filteredServerSideResuls | async"
+      [value]="result.viewValue"
+    >
+      {{ result.viewValue | uppercase }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

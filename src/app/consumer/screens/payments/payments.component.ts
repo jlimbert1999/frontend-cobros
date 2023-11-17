@@ -50,11 +50,7 @@ export class PaymentsComponent {
   clients: any[] = [];
 
   constructor(private readonly clientService: ClientService) {
-    this.paymets = clientService.readings;
-    this.clients = this.clientService.ELEMENT_DATA.map((el) => ({
-      fullname: el.fullname,
-      dni: el.dni,
-    }));
+  
   }
 
   drop(event: CdkDragDrop<payments[]>) {

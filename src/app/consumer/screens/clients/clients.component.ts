@@ -7,6 +7,9 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterClientComponent } from '../../pages/register-client/register-client.component';
+import { RegisterActionComponent } from '../../pages/register-action/register-action.component';
 
 @Component({
   selector: 'app-clients',
@@ -28,7 +31,18 @@ export class ClientsComponent {
   dataSource: any[] = [];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: any | null;
-  constructor(private readonly clientService: ClientService) {
-    this.dataSource = clientService.ELEMENT_DATA;
+  constructor(
+    private readonly clientService: ClientService,
+    public dialog: MatDialog
+  ) {
+
+  }
+
+  addClient() {
+    const dialogRef = this.dialog.open(RegisterClientComponent);
+  }
+
+  addAction() {
+    const dialogRef = this.dialog.open(RegisterActionComponent);
   }
 }

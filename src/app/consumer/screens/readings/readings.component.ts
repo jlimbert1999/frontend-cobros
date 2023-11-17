@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { MatDialog } from '@angular/material/dialog';
-import { RegisterReadingComponent } from '../../dialogs/register-reading/register-reading.component';
+import { RegisterReadingComponent } from '../../pages/register-reading/register-reading.component';
 
 @Component({
   selector: 'app-readings',
@@ -15,7 +15,7 @@ export class ReadingsComponent {
     private readonly clientService: ClientService,
     public dialog: MatDialog
   ) {
-    this.dataSource = clientService.readings;
+
   }
 
   openDialog() {

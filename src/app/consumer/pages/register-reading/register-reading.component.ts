@@ -12,9 +12,7 @@ export class RegisterReadingComponent {
   lastRecordDate?: Date;
   lastValue: number = 0;
   constructor(private clientService: ClientService) {
-    this.actions = this.clientService.ELEMENT_DATA.map((el) => el.actions).flat(
-      1
-    );
+   
   }
   selectAction() {
     this.lastRecordDate = new Date(

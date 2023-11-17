@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>REGISTRAR AFILIADO</h2>
+<mat-dialog-content>
+  <div class="container-fluid">
+    <mat-stepper #stepper>
+      <mat-step [stepControl]="FormClient">
+        <form [formGroup]="FormClient">
+          <ng-template matStepLabel>AFILIADO</ng-template>
+          <div class="row">
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Nombre"
+                  formControlName="firstname"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Apellido paterno"
+                  formControlName="lastname"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Apellido materno"
+                  formControlName="middlename"
+                  required
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="CI"
+                  formControlName="dni"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Telefono"
+                  formControlName="phone"
+                  required
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>ACCIONES</ng-template>
+        <server-mat-select-search ></server-mat-select-search>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Guardar</button>
+</mat-dialog-actions>
