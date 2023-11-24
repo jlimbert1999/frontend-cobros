@@ -15,7 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [],
   imports: [CommonModule],
@@ -35,6 +36,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatFormFieldModule,
     DragDropModule,
     MatStepperModule,
+    MatMenuModule,
+    ScrollingModule
   ],
 })
 export class MaterialModule {}

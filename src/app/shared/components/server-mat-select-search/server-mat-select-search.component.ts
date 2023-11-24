@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   ReplaySubject,
@@ -14,51 +8,55 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
+import { MatSelectSearchData } from '../../interfaces';
 
-interface MatSelectSearchData {
-  value: string;
-  viewValue: string;
-}
 @Component({
   selector: 'server-mat-select-search',
   templateUrl: './server-mat-select-search.component.html',
   styleUrls: ['./server-mat-select-search.component.scss'],
 })
-export class ServerMatSelectSearchComponent implements OnChanges {
-  @Input() allowNullValues: boolean = false;
-  @Input() results: MatSelectSearchData[] = [];
-  @Input() placeholder: string;
-  @Output() searchEvent: EventEmitter<string> = new EventEmitter();
-  @Output() eventSelectedOption: EventEmitter<string> = new EventEmitter();
+export class ServerMatSelectSearchComponent<T> {
+  @Input() placeholder: string = 'Filtrar informacion';
+  @Input({ required: true }) set options(values: MatSelectSearchData<T>[]) {
+    this.filteredServerSideOptions.next(values);
+  }
+  @Input() set currentOption(value: T) {
+    this.optionServerSideCtrl.setValue(value);
+  }
+  @Output() keyupEvent: EventEmitter<string> = new EventEmitter();
+  @Output() selectEvent: EventEmitter<T> = new EventEmitter();
 
-  public resultServerSideCtrl: FormControl = new FormControl();
-  public resultServerSideFilteringCtrl: FormControl = new FormControl();
-  public filteredServerSideResuls: ReplaySubject<MatSelectSearchData[]> =
-    new ReplaySubject<any[]>(1);
+  public optionServerSideCtrl: FormControl = new FormControl();
+  public optionServerSideFilteringCtrl = new FormControl();
   public searching: boolean = false;
+  public filteredServerSideOptions: ReplaySubject<MatSelectSearchData<T>[]> =
+    new ReplaySubject(1);
   protected _onDestroy = new Subject<void>();
 
   ngOnInit() {
-    this.resultServerSideFilteringCtrl.valueChanges
+    this.optionServerSideFilteringCtrl.valueChanges
       .pipe(
-        filter((search: string) => !!search),
+        filter((search) => !!search),
         tap(() => (this.searching = true)),
         takeUntil(this._onDestroy),
-        debounceTime(1000)
+        debounceTime(300)
       )
-      .subscribe((text) => {
-        this.searching = false;
-        this.searchEvent.emit(text);
-      });
+      .subscribe(
+        (value: string) => {
+          this.searching = false;
+          this.keyupEvent.emit(value);
+        },
+        () => {
+          this.searching = false;
+        }
+      );
   }
-  ngOnChanges(): void {
-    this.filteredServerSideResuls.next(this.results);
-  }
+
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
   }
-  selectOption(option: MatSelectSearchData) {
-    this.eventSelectedOption.emit(option.value);
+  selectOption(data: T) {
+    this.selectEvent.emit(data);
   }
 }

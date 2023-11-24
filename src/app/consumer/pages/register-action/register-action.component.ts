@@ -34,7 +34,6 @@ export class RegisterActionComponent implements OnInit {
 
   save() {
     const action = CreateActionDto.fromFormGroup(this.FormAction.value);
-    console.log(action);
     this._clientService.addAction(action).subscribe((resp) => {
       this.dialogRef.close(resp);
     });

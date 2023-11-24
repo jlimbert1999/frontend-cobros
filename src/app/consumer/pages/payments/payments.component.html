@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>PAGOS PENDIENTES</h2>
+<mat-dialog-content>
+  <div class="row"></div>
+  <div class="row p-2">
+    <mat-selection-list (selectionChange)="selectionChange(shoes._value)" #shoes>
+      @for (debt of debts; track $index) {
+      <mat-list-option [value]="debt._id">
+        <mat-icon matListItemIcon>speed</mat-icon>
+        <div matListItemTitle>
+          LECTURA:
+          {{ debt.consume }} /&nbsp;
+          {{ debt.consumptionDate | date : "longDate" }}
+        </div>
+        <div matListItemLine>{{ debt.consume * monto | currency : "Bs." }}</div>
+      </mat-list-option>
+      }@empty {
+      <div class="alert alert-primary" role="alert">SIN REGISITROS</div>
+      }
+    </mat-selection-list>
+  </div>
+
+  <div class="mb-3 row text-center">
+    <label for="txtTotal" class="col-sm-2 col-form-label">TOTAL </label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        readonly
+        class="form-control"
+        id="txtTotal"
+        [value]="total()"
+      />
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button (click)="pay()">Aceptar</button>
+</mat-dialog-actions>

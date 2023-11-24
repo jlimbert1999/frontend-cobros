@@ -1,25 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit, signal } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ClientService } from '../../services/client.service';
+import { action, reading } from '../../interfaces';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CreateReadingDto } from '../../dto';
 
 @Component({
   selector: 'app-register-reading',
   templateUrl: './register-reading.component.html',
   styleUrls: ['./register-reading.component.scss'],
 })
-export class RegisterReadingComponent {
-  actions: any[] = [];
-  currentRecordDate = new Date();
-  lastRecordDate?: Date;
-  lastValue: number = 0;
-  constructor(private clientService: ClientService) {
-   
+export class RegisterReadingComponent implements OnInit {
+  lastConsumptionRecord = signal<reading | undefined>(undefined);
+  formReading = this.fb.group({
+    consume: ['', [Validators.required]],
+    consumptionDate: [new Date(), Validators.required],
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private clientService: ClientService,
+    public dialogRef: MatDialogRef<RegisterReadingComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: action
+  ) {}
+  ngOnInit(): void {
+    this.clientService
+      .getLastConsumptionRecord(this.data._id)
+      .subscribe((resp) => this.lastConsumptionRecord.set(resp));
   }
-  selectAction() {
-    this.lastRecordDate = new Date(
-      this.currentRecordDate.getFullYear(),
-      this.currentRecordDate.getMonth() - 1,
-      Math.random() * (30 - 1) + 1
+
+  save() {
+    const reading = CreateReadingDto.fromForm(
+      this.data._id,
+      this.formReading.value
     );
-    this.lastValue = Math.floor(Math.random() * (200 - 50) + 50);
+    this.clientService.addReading(reading).subscribe((resp) => {
+      this.dialogRef.close();
+    });
   }
 }
