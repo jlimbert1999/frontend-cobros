@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './screens/home/home.component';
 import { MaterialModule } from './material/material.module';
+import { PrimengModule } from './primeng/primeng.module';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localeEs, 'es');
 @NgModule({
@@ -20,6 +22,8 @@ registerLocaleData(localeEs, 'es');
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    PrimengModule,
+    FormsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },

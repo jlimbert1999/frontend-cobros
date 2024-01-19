@@ -12,6 +12,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./consumer/consumer.module').then((m) => m.ConsumerModule),
       },
+      {
+        path: 'config',
+        loadChildren: () =>
+          import('./administration/administration.module').then(
+            (m) => m.AdministrationModule
+          ),
+      },
     ],
   },
 ];

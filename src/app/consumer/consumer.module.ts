@@ -12,6 +12,7 @@ import { RegisterReadingComponent } from './pages/register-reading/register-read
 import { RegisterClientComponent } from './pages/register-client/register-client.component';
 import { RegisterActionComponent } from './pages/register-action/register-action.component';
 import { SharedModule } from '../shared/shared.module';
+import { PrimengModule } from '../primeng/primeng.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    PrimengModule
   ],
 })
 export class ConsumerModule {}

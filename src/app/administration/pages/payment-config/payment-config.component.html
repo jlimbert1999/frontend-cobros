@@ -1,0 +1,46 @@
+<div class="card flex flex-wrap gap-3 p-fluid">
+  <div class="flex-auto">
+    <label class="mb-2 block font-bold" for="stacked">Stacked</label>
+    <p-inputNumber
+      [(ngModel)]="value1"
+      [showButtons]="true"
+      inputId="stacked"
+      mode="currency"
+      currency="BOL"
+    >
+    </p-inputNumber>
+  </div>
+  <div class="flex-auto">
+    <label class="mb-2 block font-bold" for="minmax-buttons"
+      >Min-Max Boundaries</label
+    >
+    <p-inputNumber
+      [(ngModel)]="value2"
+      mode="decimal"
+      [showButtons]="true"
+      inputId="minmax-buttons"
+      [min]="0"
+      [max]="100"
+    >
+    </p-inputNumber>
+  </div>
+  <div class="flex-auto">
+    <label class="mb-2 block font-bold" for="horizontal"
+      >Horizontal with Step</label
+    >
+    <p-inputNumber
+      [(ngModel)]="value3"
+      [showButtons]="true"
+      buttonLayout="horizontal"
+      inputId="horizontal"
+      spinnerMode="horizontal"
+      [step]="0.25"
+      decrementButtonClass="p-button-danger"
+      incrementButtonClass="p-button-success"
+      incrementButtonIcon="pi pi-plus"
+      decrementButtonIcon="pi pi-minus"
+      mode="currency"
+      currency="EUR"
+    ></p-inputNumber>
+  </div>
+</div>
